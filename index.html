@@ -3,13 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Яков Якубов — Fullstack разработчик</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <title>Яков Якубов - Fullstack-разработчик</title>
+    <meta
+      name="description"
+      content="Яков Якубов, fullstack-разработчик из Москвы. Node.js, React, Next.js, PostgreSQL. Сайты и веб-сервисы от архитектуры до продакшена: SEO, тесты, CI, безопасный деплой."
+    />
+    <meta name="theme-color" content="#e2e5ea" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;900&family=PT+Sans:wght@400;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="fonts/CeraRound-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/CeraRound-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <style>
+      @font-face {
+        font-family: "Cera Round";
+        src: url("fonts/CeraRound-Light.woff2") format("woff2");
+        font-weight: 300;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Cera Round";
+        src: url("fonts/CeraRound-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Cera Round";
+        src: url("fonts/CeraRound-Medium.woff2") format("woff2");
+        font-weight: 500;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Cera Round";
+        src: url("fonts/CeraRound-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-display: swap;
+      }
+
       *,
       *::before,
       *::after {
@@ -19,1092 +58,1393 @@
       }
 
       :root {
-        --paper: #f1f3ee;
-        --paper-raised: #f9faf6;
-        --ink: #16231f;
-        --ink-soft: #3c4a45;
-        --steel: #6b756f;
-        --steel-soft: #99a29b;
-        --hairline: #d9d9cd;
-        --grid-line: rgba(200, 30, 58, 0.09);
-        --red: #b91c3c;
-        --red-soft: rgba(185, 28, 60, 0.07);
-        --red-border: rgba(185, 28, 60, 0.28);
-        --teal: #0e6b5c;
-        --teal-soft: rgba(14, 107, 92, 0.08);
-        --teal-border: rgba(14, 107, 92, 0.3);
-        --tag-bg: #e9e9dd;
+        --ground: #e2e5ea;
+        --surface: #edf0f4;
+        --hairline: #c2c8d2;
+        --midnight: #0c1a3d;
+        --midnight-soft: #33426b;
+        --muted: #55607d;
+        --on-midnight: #e8ebf1;
+        --on-midnight-muted: #a5aec6;
+        --on-midnight-line: rgba(232, 235, 241, 0.18);
+        --font:
+          "Cera Round", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       }
 
       html {
-        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        html {
+          scroll-behavior: smooth;
+        }
       }
 
       body {
-        font-family: "PT Sans", sans-serif;
-        background: var(--paper);
-        color: var(--ink);
-        min-height: 100vh;
+        font-family: var(--font);
+        font-size: 17px;
+        font-weight: 400;
         line-height: 1.6;
+        color: var(--midnight-soft);
+        background: var(--ground);
+        min-height: 100vh;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
       }
 
-      /* ECG-strip grid texture */
-      body::before {
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--midnight);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      /* ── ФОН ──
+         Меняется атрибутом на <body>: flat | grain | glow | rails */
+      body[data-bg="grain"]::before {
         content: "";
         position: fixed;
         inset: 0;
-        background-image:
-          linear-gradient(var(--grid-line) 1px, transparent 1px),
-          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-        background-size: 28px 28px;
         pointer-events: none;
-        z-index: 0;
+        opacity: 0.55;
+        mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05 0 0 0 0 .1 0 0 0 0 .24 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      body[data-bg="glow"] {
+        background:
+          radial-gradient(900px 560px at 6% -6%, #f2f4f7 0%, transparent 70%),
+          radial-gradient(820px 640px at 100% 38%, #d6dbe4 0%, transparent 70%),
+          var(--ground);
+        background-attachment: fixed;
+      }
+
+      body[data-bg="rails"] main.container {
+        border-inline: 1px solid var(--hairline);
       }
 
       .container {
-        max-width: 860px;
+        max-width: 1120px;
         margin: 0 auto;
         padding: 0 24px;
         position: relative;
         z-index: 1;
       }
 
-      /* ── HERO ── */
-      .hero {
-        padding: 88px 0 48px;
-        position: relative;
+      /* ── ВЕРХНЯЯ ПАНЕЛЬ ── */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(226, 229, 234, 0.86);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(194, 200, 210, 0.6);
       }
 
-      .hero-top {
+      .topbar-inner {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
         gap: 24px;
-        flex-wrap: wrap;
-        margin-bottom: 32px;
+        height: 56px;
+      }
+
+      .wordmark {
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: -0.01em;
+        color: var(--midnight);
+        text-decoration: none;
+      }
+
+      .topnav {
+        display: flex;
+        gap: 22px;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .topnav a {
+        color: var(--midnight-soft);
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .topnav a:hover {
+        color: var(--midnight);
+      }
+
+      /* ── HERO ── */
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+        gap: 40px 64px;
+        padding: clamp(56px, 9vw, 104px) 0 clamp(56px, 8vw, 96px);
       }
 
       .hero h1 {
-        font-family: "Golos Text", sans-serif;
-        font-size: clamp(38px, 6vw, 56px);
+        font-size: clamp(60px, 11vw, 120px);
         font-weight: 700;
-        letter-spacing: -0.02em;
-        line-height: 1.05;
-        color: var(--ink);
+        line-height: 0.92;
+        letter-spacing: -0.045em;
+        color: var(--midnight);
       }
 
-      .hero h1 span {
-        color: var(--red);
+      .hero h1 .line {
+        display: block;
+        overflow: hidden;
+        padding: 0.06em 0 0.12em;
+        margin: -0.06em 0 -0.12em;
+      }
+
+      .hero h1 .line > span {
+        display: inline-block;
+        animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      }
+
+      .hero h1 .line:nth-child(2) > span {
+        animation-delay: 0.1s;
+      }
+
+      @keyframes rise {
+        from {
+          transform: translateY(110%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero h1 .line > span {
+          animation: none;
+        }
       }
 
       .hero-role {
-        font-size: clamp(15px, 2.2vw, 18px);
-        color: var(--ink-soft);
-        font-weight: 400;
-        margin-top: 6px;
-        letter-spacing: -0.005em;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.25;
+        letter-spacing: -0.015em;
+        color: var(--midnight);
+        margin-bottom: 18px;
       }
 
-      /* Chart-style meta row */
-      .chart-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0;
-        border-top: 1px solid var(--hairline);
-        border-bottom: 1px solid var(--hairline);
-        margin-bottom: 28px;
-      }
-
-      .chart-field {
-        flex: 1 1 200px;
-        padding: 14px 20px 14px 0;
-        border-left: 1px solid var(--hairline);
-        padding-left: 20px;
-      }
-
-      .chart-field:first-child {
-        border-left: none;
-        padding-left: 0;
-      }
-
-      .chart-label {
-        display: block;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        color: var(--steel);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 5px;
-      }
-
-      .chart-value {
-        display: block;
-        font-size: 14px;
-        color: var(--ink);
-        font-weight: 700;
-        letter-spacing: -0.01em;
-      }
-
-      .hero-bio {
-        font-size: 15px;
-        color: var(--ink-soft);
-        max-width: 580px;
-        line-height: 1.75;
-        margin-bottom: 36px;
-      }
-
-      .hero-bio strong {
-        color: var(--ink);
-        font-weight: 700;
+      .hero-bio p + p {
+        margin-top: 14px;
       }
 
       .hero-links {
         display: flex;
-        gap: 12px;
         flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
       }
 
       .btn {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 11px 20px;
-        border-radius: 4px;
-        font-size: 14px;
-        font-weight: 700;
+        padding: 12px 22px;
+        border-radius: 999px;
+        border: 1.5px solid var(--midnight);
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.2;
         text-decoration: none;
         transition:
-          transform 0.15s ease,
-          background 0.15s ease,
+          background-color 0.15s ease,
+          color 0.15s ease,
           border-color 0.15s ease;
-        font-family: "PT Sans", sans-serif;
-        letter-spacing: -0.005em;
       }
 
       .btn-primary {
-        background: var(--teal);
-        color: #fbfaf6;
-        border: 1px solid var(--teal);
+        background: var(--midnight);
+        color: var(--on-midnight);
       }
 
       .btn-primary:hover {
-        background: #0b564a;
-        transform: translateY(-1px);
+        background: var(--midnight-soft);
+        border-color: var(--midnight-soft);
       }
 
       .btn-ghost {
-        background: transparent;
-        color: var(--ink-soft);
-        border: 1px solid var(--hairline);
+        color: var(--midnight);
       }
 
       .btn-ghost:hover {
-        border-color: var(--ink-soft);
-        color: var(--ink);
-        transform: translateY(-1px);
+        background: var(--midnight);
+        color: var(--on-midnight);
       }
 
-      .btn svg {
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-      }
-
-      /* ── PULSE DIVIDER ── */
-      .pulse-divider {
-        width: 100%;
-        height: 32px;
-        margin-bottom: 40px;
-        color: var(--red);
-        opacity: 0.75;
-      }
-
-      .pulse-divider svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-        overflow: visible;
-      }
-
-      .pulse-divider path {
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 1.6;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-dasharray: 2200;
-        stroke-dashoffset: 2200;
-        animation: draw 1.6s 0.3s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-      }
-
-      @keyframes draw {
-        to {
-          stroke-dashoffset: 0;
-        }
-      }
-
-      /* ── SECTION ── */
+      /* ── РАЗДЕЛЫ ── */
       .section {
-        margin-bottom: 68px;
-      }
-
-      .section-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 28px;
-      }
-
-      .section-label {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        color: var(--steel);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
-
-      .section-line {
-        flex: 1;
-        height: 1px;
-        background: var(--hairline);
-      }
-
-      /* ── PROJECT CARDS ── */
-      .projects-grid {
         display: grid;
-        gap: 14px;
+        grid-template-columns: 200px minmax(0, 1fr);
+        gap: 24px 56px;
+        padding: 48px 0;
+        border-top: 1px solid var(--hairline);
+        scroll-margin-top: 56px;
       }
 
-      .project-card {
-        background: var(--paper-raised);
-        border: 1px solid var(--hairline);
-        border-left: 3px solid var(--hairline);
-        border-radius: 6px;
-        padding: 26px 28px;
-        text-decoration: none;
-        color: inherit;
-        display: block;
-        transition:
-          border-color 0.15s ease,
-          box-shadow 0.15s ease,
-          transform 0.15s ease;
-        position: relative;
+      .section-head {
+        align-self: start;
+        position: sticky;
+        top: 88px;
       }
 
-      .project-card[data-status="live"] {
-        border-left-color: var(--teal);
+      .section-title {
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: var(--midnight);
       }
 
-      .project-card:hover {
-        border-color: var(--steel-soft);
-        box-shadow: 3px 4px 0 var(--hairline);
-        transform: translate(-1px, -1px);
+      .section-note {
+        margin-top: 10px;
+        font-size: 15px;
+        line-height: 1.5;
+        color: var(--muted);
       }
 
-      .project-card[data-status="live"]:hover {
-        border-left-color: var(--teal);
-        box-shadow: 3px 4px 0 var(--teal-border);
-      }
-
-      .project-top {
+      /* ── ЧИПЫ ── */
+      .chips {
         display: flex;
-        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        padding: 9px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--hairline);
+        background: var(--surface);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
+        color: var(--midnight);
+      }
+
+      /* ── СТЕК ── */
+      .stack-row {
+        display: grid;
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 12px 24px;
+        padding: 16px 0;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .stack-row:first-child {
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .stack-row:last-child {
+        padding-bottom: 0;
+      }
+
+      .stack-row dt {
+        padding-top: 8px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.3;
+        color: var(--midnight);
+      }
+
+      .stack-row--core .chip {
+        padding: 11px 18px;
+        background: var(--midnight);
+        border-color: var(--midnight);
+        font-size: 15px;
+        color: var(--on-midnight);
+      }
+
+      /* ── ПРОЕКТЫ ── */
+      .project {
+        padding: 36px 0;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .project:first-child {
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .project:last-child {
+        padding-bottom: 0;
+      }
+
+      .project-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
         justify-content: space-between;
-        gap: 16px;
+        gap: 8px 24px;
         margin-bottom: 12px;
       }
 
       .project-title {
-        font-family: "Golos Text", sans-serif;
-        font-size: 17px;
-        font-weight: 600;
-        color: var(--ink);
-        letter-spacing: -0.01em;
-      }
-
-      .project-arrow {
-        color: var(--steel-soft);
-        transition: all 0.15s ease;
-        flex-shrink: 0;
-        margin-top: 2px;
-      }
-
-      .project-card:hover .project-arrow {
-        color: var(--red);
-        transform: translate(2px, -2px);
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.015em;
+        color: var(--midnight);
       }
 
       .project-desc {
-        font-size: 14px;
-        color: var(--ink-soft);
-        line-height: 1.65;
-        margin-bottom: 18px;
+        max-width: 64ch;
       }
 
-      /* Screenshot inside card */
-      .project-screenshot {
+      .project-desc + .project-desc {
+        margin-top: 12px;
+      }
+
+      .project-body {
+        margin-bottom: 22px;
+      }
+
+      .shots {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+
+      .shots--pair {
+        grid-template-columns: 1.35fr 1fr;
+      }
+
+      .shot {
+        display: block;
         width: 100%;
-        border-radius: 4px;
-        border: 1px solid var(--hairline);
+        padding: 0;
+        border-radius: 8px;
         overflow: hidden;
-        margin-bottom: 18px;
+        border: 1px solid var(--hairline);
+        background: none;
+        cursor: zoom-in;
       }
 
-      .project-screenshot img {
+      .shot:focus-visible {
+        outline: 2px solid var(--midnight);
+        outline-offset: 3px;
+      }
+
+      .lightbox {
+        max-width: min(1200px, 100vw - 32px);
+        max-height: calc(100vh - 128px);
+        margin: auto;
+        padding: 0;
+        border: 0;
+        border-radius: 8px;
+        background: var(--surface);
+        overflow: visible;
+      }
+
+      .lightbox::backdrop {
+        background: rgba(12, 26, 61, 0.72);
+      }
+
+      .lightbox img {
+        display: block;
+        max-width: 100%;
+        max-height: calc(100vh - 128px);
+        width: auto;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: -52px;
+        right: 0;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        border-radius: 50%;
+        background: var(--midnight);
+        color: var(--on-midnight);
+        font: inherit;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .lightbox-close:hover {
+        background: var(--midnight-soft);
+      }
+
+      .lightbox-close:focus-visible {
+        outline: 2px solid var(--on-midnight);
+        outline-offset: 2px;
+      }
+
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        z-index: 20;
+        padding: 12px 20px;
+        border-radius: 999px;
+        background: var(--midnight);
+        color: var(--on-midnight);
+        font-size: 15px;
+        font-weight: 500;
+        text-align: center;
+        width: max-content;
+        max-width: calc(100vw - 32px);
+        transform: translate(-50%, 16px);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .toast.is-visible {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      .shot img {
+        display: block;
         width: 100%;
         height: auto;
-        display: block;
       }
 
-      .project-screenshots-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-bottom: 18px;
-      }
-
-      .project-screenshots-grid .project-screenshot {
-        margin-bottom: 0;
-      }
-
-      @media (max-width: 480px) {
-        .project-screenshots-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .project-footer {
+      .project-foot {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
+        gap: 14px 24px;
       }
 
-      .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-      }
-
-      .tag {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        color: var(--ink-soft);
-        background: var(--tag-bg);
-        border: 1px solid var(--hairline);
-        border-radius: 3px;
-        padding: 3px 8px;
-        letter-spacing: 0.01em;
+      .project .chip {
+        padding: 7px 12px;
+        background: transparent;
+        font-size: 13px;
       }
 
       .project-links {
         display: flex;
-        gap: 8px;
-        align-items: center;
+        gap: 20px;
+        font-size: 15px;
+        font-weight: 500;
       }
 
-      .project-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 12px;
-        color: var(--steel);
-        text-decoration: none;
-        transition: color 0.15s;
-        font-family: "JetBrains Mono", monospace;
+      .project-links a {
+        color: var(--midnight);
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 5px;
+        transition: text-decoration-thickness 0.15s ease;
       }
 
-      .project-case-link {
-        margin-top: -6px;
-        padding-left: 3px;
+      .project-links a:hover {
+        text-decoration-thickness: 3px;
       }
 
-      .project-link:hover {
-        color: var(--red);
-      }
-      .project-link svg {
-        width: 13px;
-        height: 13px;
-      }
-
-      /* Status badges */
-      .badge-live {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 11px;
-        border-radius: 3px;
-        padding: 3px 8px;
-        font-family: "JetBrains Mono", monospace;
-        letter-spacing: 0.01em;
-      }
-
-      .badge-live {
-        color: var(--teal);
-        background: var(--teal-soft);
-        border: 1px solid var(--teal-border);
-      }
-
-      .badge-live::before {
-        content: "";
-        width: 5px;
-        height: 5px;
-        background: var(--teal);
-        border-radius: 50%;
-      }
-
-      /* ── CONTACT ── */
-      .contact-grid {
+      /* ── ПРАКТИКИ ── */
+      .practice {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 48px;
       }
 
-      .contact-card {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        background: var(--paper-raised);
-        border: 1px solid var(--hairline);
-        border-radius: 6px;
-        padding: 18px 20px;
-        text-decoration: none;
-        transition:
-          border-color 0.15s ease,
-          transform 0.15s ease;
+      .practice-item {
+        padding: 28px 0;
+        border-top: 1px solid var(--hairline);
       }
 
-      .contact-card:hover {
-        border-color: var(--steel-soft);
-        transform: translateY(-1px);
+      .practice-item:nth-child(-n + 2) {
+        padding-top: 0;
+        border-top: 0;
       }
 
-      .contact-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 4px;
-        background: var(--teal-soft);
-        border: 1px solid var(--teal-border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        color: var(--teal);
+      .practice-item:nth-last-child(-n + 2) {
+        padding-bottom: 0;
       }
 
-      .contact-icon svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      .contact-label {
-        font-size: 10px;
-        color: var(--steel);
-        font-family: "JetBrains Mono", monospace;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        margin-bottom: 3px;
-      }
-
-      .contact-value {
-        font-size: 13px;
-        color: var(--ink);
+      .practice-item h3 {
+        margin-bottom: 8px;
+        font-size: 19px;
         font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        color: var(--midnight);
       }
 
-      /* ── EDUCATION ── */
-      .edu-grid {
-        display: grid;
-        gap: 12px;
+      .practice-item p {
+        font-size: 16px;
+        line-height: 1.65;
       }
 
-      .edu-card {
+      /* ── ОБРАЗОВАНИЕ ── */
+      .edu-row {
         display: flex;
-        align-items: center;
-        gap: 16px;
-        background: var(--paper-raised);
-        border: 1px solid var(--hairline);
-        border-radius: 6px;
-        padding: 20px 24px;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px 24px;
+        flex-wrap: wrap;
+        padding: 18px 0;
+        border-top: 1px solid var(--hairline);
       }
 
-      .edu-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 4px;
-        background: var(--teal-soft);
-        border: 1px solid var(--teal-border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        color: var(--teal);
+      .edu-row:first-child {
+        padding-top: 0;
+        border-top: 0;
       }
 
-      .edu-icon svg {
-        width: 20px;
-        height: 20px;
+      .edu-row:last-child {
+        padding-bottom: 0;
       }
 
       .edu-school {
-        font-family: "Golos Text", sans-serif;
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--ink);
-        letter-spacing: -0.005em;
-        margin-bottom: 2px;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+        color: var(--midnight);
       }
 
       .edu-degree {
-        font-size: 13px;
-        color: var(--ink-soft);
+        font-size: 16px;
       }
 
-      .edu-year {
-        font-size: 11px;
-        color: var(--steel);
-        font-family: "JetBrains Mono", monospace;
-        margin-top: 2px;
+      .edu-years {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--muted);
+        white-space: nowrap;
       }
 
-      /* ── FOOTER ── */
-      footer {
-        border-top: 1px solid var(--hairline);
-        padding: 28px 0;
-        margin-top: 24px;
+      /* ── КОНТАКТЫ ── */
+      .contacts {
+        margin-top: 32px;
+        padding: 72px 0 28px;
+        background: var(--midnight);
+        color: var(--on-midnight-muted);
       }
 
-      .footer-inner {
+      .contacts .section {
+        padding: 0 0 56px;
+        border-top: 0;
+      }
+
+      .contacts .section-title {
+        color: var(--on-midnight);
+      }
+
+      .contacts a:focus-visible {
+        outline-color: var(--on-midnight);
+      }
+
+      .contact-list li {
+        border-top: 1px solid var(--on-midnight-line);
+      }
+
+      .contact-list li:last-child {
+        border-bottom: 1px solid var(--on-midnight-line);
+      }
+
+      .contact-link {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         justify-content: space-between;
+        gap: 8px 24px;
         flex-wrap: wrap;
-        gap: 12px;
+        padding: 18px 0;
+        color: var(--on-midnight);
+        text-decoration: none;
       }
 
-      .footer-text {
-        font-size: 12px;
-        color: var(--steel);
-        font-family: "JetBrains Mono", monospace;
+      .contact-name {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--on-midnight-muted);
+      }
+
+      .contact-value {
+        font-size: clamp(18px, 2.2vw, 24px);
+        font-weight: 400;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        overflow-wrap: anywhere;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 5px;
+        transition: text-decoration-color 0.15s ease;
+      }
+
+      .contact-link:hover .contact-value {
+        text-decoration-color: currentColor;
+      }
+
+      .footer-line {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+        font-size: 14px;
+      }
+
+      /* ── АДАПТИВ ── */
+      @media (max-width: 959px) {
+        .hero {
+          grid-template-columns: minmax(0, 1fr);
+          align-items: start;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .section {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 24px;
+          padding: 36px 0;
+        }
+        .section-head {
+          position: static;
+        }
+        .stack-row {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 10px;
+        }
+        .stack-row dt {
+          padding-top: 0;
+        }
+        .practice {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .practice-item:nth-child(2) {
+          padding-top: 28px;
+          border-top: 1px solid var(--hairline);
+        }
+        .practice-item:nth-last-child(2) {
+          padding-bottom: 28px;
+        }
+        .contacts {
+          padding-top: 48px;
+        }
       }
 
       @media (max-width: 640px) {
-        .hero {
-          padding: 56px 0 40px;
+        body {
+          font-size: 16px;
         }
-        .chart-field {
-          flex: 1 1 45%;
-          border-left: none !important;
-          padding-left: 0 !important;
+        .container {
+          padding: 0 20px;
         }
-        .project-card {
-          padding: 20px;
+        .wordmark {
+          display: none;
         }
-        .footer-inner {
-          flex-direction: column;
-          align-items: flex-start;
+        .topnav {
+          width: 100%;
+          justify-content: space-between;
+          gap: 12px;
+          font-size: 14px;
+        }
+        .topnav a[href="#education"] {
+          display: none;
+        }
+        .shots--pair {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .project {
+          padding: 30px 0;
         }
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-top">
-          <div>
-            <h1>Яков <span>Якубов</span></h1>
-            <p class="hero-role">Fullstack разработчик</p>
-          </div>
-        </div>
-
-        <div class="chart-meta">
-          <div class="chart-field">
-            <span class="chart-label">место работы</span>
-            <span class="chart-value">государственная больница, Москва</span>
-          </div>
-          <div class="chart-field">
-            <span class="chart-label">специализация</span>
-            <span class="chart-value">Fullstack · SEO/GEO</span>
-          </div>
-          <div class="chart-field">
-            <span class="chart-label">стек</span>
-            <span class="chart-value">Next.js · Node.js · PostgreSQL</span>
-          </div>
-        </div>
-
-        <p class="hero-bio">
-          Разрабатываю <strong>сайты, веб-сервисы и Telegram-ботов</strong>.
-          Работаю fullstack-разработчиком в
-          <strong>государственной больнице</strong> в Москве — создаю
-          медицинские веб-сервисы, понимаю специфику отрасли. Занимаюсь
-          SEO-оптимизацией под Яндекс и Google.
-        </p>
-        <div class="hero-links">
-          <a
-            href="https://t.me/yaks1331"
-            class="btn btn-primary"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.26l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.299z"
-              />
-            </svg>
-            Написать в Telegram
-          </a>
-          <a
-            href="mailto:yakubov01yakov@yandex.ru"
-            class="btn btn-ghost"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-              />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            Email
-          </a>
-          <a
-            href="https://github.com/YakubovYakov"
-            class="btn btn-ghost"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-              />
-            </svg>
-            GitHub
-          </a>
-        </div>
-      </section>
-
-      <div class="pulse-divider" aria-hidden="true">
-        <svg viewBox="0 0 800 40" preserveAspectRatio="none">
-          <path
-            d="M0,20 H300 L312,20 L322,2 L332,38 L342,20 L354,20 H700 L712,20 L722,2 L732,38 L742,20 L754,20 H800"
-          />
-        </svg>
+  <body data-bg="flat">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="wordmark" href="#top">Яков Якубов</a>
+        <nav class="topnav" aria-label="Разделы">
+          <a href="#stack">Стек</a>
+          <a href="#projects">Проекты</a>
+          <a href="#practice">Практики</a>
+          <a href="#education">Образование</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
       </div>
+    </header>
 
-      <!-- PROJECTS -->
-      <section class="section">
-        <div class="section-header">
-          <span class="section-label">проекты</span>
-          <div class="section-line"></div>
-        </div>
-
-        <div class="projects-grid">
-          <!-- GKB-24 -->
-          <a
-            href="https://gkb-24.ru"
-            class="project-card"
-            data-status="live"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="project-top">
-              <span class="project-title"
-                >Сайт ГКБ №&nbsp;24 — gkb-24.ru</span
-              >
-              <svg
-                class="project-arrow"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                width="18"
-                height="18"
-              >
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
-              </svg>
-            </div>
-            <p class="project-desc">
-              Публичный сайт московской городской клинической больницы
-              №&nbsp;24. Next.js App Router + Express-сервер, SEO и
-              GEO-оптимизация под Яндекс и Google, онлайн-запись пациентов,
-              страницы врачей и отделений.
+    <main class="container" id="top">
+      <section class="hero">
+        <h1>
+          <span class="line"><span>Яков</span></span>
+          <span class="line"><span>Якубов</span></span>
+        </h1>
+        <div class="hero-body">
+          <p class="hero-role">Fullstack-разработчик</p>
+          <div class="hero-bio">
+            <p>
+              Делаю веб-продукты от архитектуры до продакшена: backend на
+              Node.js, интерфейсы на React и Next.js, PostgreSQL, деплой,
+              безопасность и SEO. Коммерческий опыт с января 2024 года.
             </p>
-            <div class="project-screenshot">
-              <img
-                src="images/gkb24.jpg"
-                alt="Скриншот сайта ГКБ №24"
-                loading="lazy"
-              />
-            </div>
-            <div class="project-footer">
-              <div class="tags">
-                <span class="tag">Next.js</span>
-                <span class="tag">React</span>
-                <span class="tag">Express</span>
-                <span class="tag">SEO</span>
-              </div>
-              <span class="badge-live">live</span>
-            </div>
-          </a>
-
-          <div class="project-case-link">
+            <p>
+              С сентября 2024 года работаю в ГКБ №&nbsp;24 в Москве: единственный
+              разработчик публичного сайта больницы и админ-панели, делаю
+              внутренние сервисы для персонала и пациентов. Требования и макеты
+              получаю от продакт-менеджера и дизайнеров, техническую
+              реализацию, сроки и риски веду сам.
+            </p>
+          </div>
+          <div class="hero-links">
             <a
-              class="project-link"
-              href="https://github.com/YakubovYakov/gkb-24-case"
+              href="https://t.me/yaks1331"
+              class="btn btn-primary"
               target="_blank"
               rel="noopener"
+              >Написать в Telegram</a
             >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.26l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.299z" />
-              </svg>
-              Разбор архитектуры и решений проекта
-            </a>
+            <a href="mailto:yakubov01yakov@yandex.ru" class="btn btn-ghost"
+              >Email</a
+            >
+            <a
+              href="https://github.com/YakubovYakov"
+              class="btn btn-ghost"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
           </div>
+        </div>
+      </section>
 
-          <!-- Booking -->
-          <div class="project-card" style="cursor: default">
-            <div class="project-top">
-              <span class="project-title"
-                >Система бронирования переговорных</span
-              >
+      <!-- СТЕК -->
+      <section class="section" id="stack">
+        <div class="section-head">
+          <h2 class="section-title">Стек</h2>
+        </div>
+        <dl class="stack">
+          <div class="stack-row stack-row--core">
+            <dt>Основной</dt>
+            <dd>
+              <ul class="chips">
+                <li class="chip">Next.js (App Router, SSR)</li>
+                <li class="chip">React</li>
+                <li class="chip">TypeScript</li>
+                <li class="chip">Node.js</li>
+                <li class="chip">Express</li>
+                <li class="chip">PostgreSQL</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-row">
+            <dt>Frontend</dt>
+            <dd>
+              <ul class="chips">
+                <li class="chip">JavaScript</li>
+                <li class="chip">Vite</li>
+                <li class="chip">Ant Design</li>
+                <li class="chip">HTML и CSS</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-row">
+            <dt>Backend</dt>
+            <dd>
+              <ul class="chips">
+                <li class="chip">REST API</li>
+                <li class="chip">JWT</li>
+                <li class="chip">Zod</li>
+                <li class="chip">LDAP (Active Directory)</li>
+                <li class="chip">Интеграции с внешними сервисами</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-row">
+            <dt>Данные</dt>
+            <dd>
+              <ul class="chips">
+                <li class="chip">Redis</li>
+                <li class="chip">MySQL</li>
+                <li class="chip">MongoDB</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-row">
+            <dt>Тестирование</dt>
+            <dd>
+              <ul class="chips">
+                <li class="chip">Jest</li>
+                <li class="chip">Supertest</li>
+                <li class="chip">Testing Library</li>
+                <li class="chip">Интеграционные тесты</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-row">
+            <dt>CI/CD и эксплуатация</dt>
+            <dd>
+              <ul class="chips">
+                <li class="chip">Git</li>
+                <li class="chip">GitHub Actions</li>
+                <li class="chip">Docker</li>
+                <li class="chip">Docker Compose</li>
+                <li class="chip">Linux</li>
+                <li class="chip">Nginx</li>
+                <li class="chip">PM2</li>
+                <li class="chip">systemd</li>
+                <li class="chip">Cloudflare</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-row">
+            <dt>Интеграции и SEO</dt>
+            <dd>
+              <ul class="chips">
+                <li class="chip">Telegram Bot API</li>
+                <li class="chip">MAX Bot API</li>
+                <li class="chip">Playwright</li>
+                <li class="chip">Python</li>
+                <li class="chip">Техническое SEO</li>
+                <li class="chip">JSON-LD</li>
+                <li class="chip">Яндекс Метрика</li>
+                <li class="chip">Яндекс Вебмастер</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-row">
+            <dt>ИИ-агенты</dt>
+            <dd>
+              <ul class="chips">
+                <li class="chip">Claude Code</li>
+                <li class="chip">Codex</li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- ПРОЕКТЫ -->
+      <section class="section" id="projects">
+        <div class="section-head">
+          <h2 class="section-title">Проекты</h2>
+        </div>
+        <div class="projects">
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">
+                Сайт ГКБ №&nbsp;24, gkb-24.ru
+              </h3>
             </div>
-            <p class="project-desc">
-              Веб-приложение для бронирования переговорных комнат внутри
-              организации. Недельная таблица расписания, валидация пересечений
-              броней на клиенте, создание и редактирование броней с выбором
-              даты и времени.
-            </p>
-            <div class="project-screenshots-grid">
-              <div class="project-screenshot">
+            <div class="project-body">
+              <p class="project-desc">
+                Публичный сайт московской городской клинической больницы
+                №&nbsp;24. Разработал с нуля и сопровождаю: онлайн-запись
+                пациентов, страницы врачей и отделений, SSR на Next.js App
+                Router, серверная часть на Express. Один код обслуживает два
+                сайта, больницы и медицинского центра, с разной картой сайта,
+                разметкой и маршрутизацией по поддомену.
+              </p>
+              <p class="project-desc">
+                Админ-панель на 12&nbsp;разделов с доступом по ролям: с ней
+                работают 20&nbsp;сотрудников из разных отделов больницы, в том
+                числе колл-центра и маркетинга. Веду техническое SEO и
+                GEO-оптимизацию под Яндекс и Google, через Cloudflare настроил
+                DNS, проксирование трафика и SSL.
+              </p>
+              <p class="project-desc">
+                Около 40&nbsp;000 визитов в месяц на двух сайтах. Больше
+                3&nbsp;500 обращений пациентов за полгода, сейчас около 30 в
+                день, каждое четвёртое приходит через ботов Telegram и MAX.
+              </p>
+            </div>
+            <div class="shots">
+              <button type="button" class="shot" aria-label="Открыть скриншот">
+                <img
+                  src="images/gkb24.jpg"
+                  alt="Скриншот сайта ГКБ №24"
+                  width="3456"
+                  height="1994"
+                  loading="lazy"
+                />
+              </button>
+            </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">Next.js</li>
+                <li class="chip">React</li>
+                <li class="chip">Express</li>
+                <li class="chip">PostgreSQL</li>
+                <li class="chip">Redis</li>
+                <li class="chip">Ant Design</li>
+                <li class="chip">Cloudflare</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://gkb-24.ru" target="_blank" rel="noopener"
+                  >Открыть сайт</a
+                >
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">CRM для медицинского центра</h3>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">
+                SPA для ведения пациентов: карточки, история приёмов, архив,
+                заметки и статусы. Поиск пациентов с автоподстановкой диагнозов,
+                интеграция с медицинским API. Серверная бизнес-логика, обработка
+                ошибок и защита пациентских данных. Работает в продакшене внутри
+                больницы.
+              </p>
+            </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">React</li>
+                <li class="chip">Node.js</li>
+                <li class="chip">Express</li>
+                <li class="chip">PostgreSQL</li>
+                <li class="chip">REST API</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">Система координации госпитализаций</h3>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">
+                Ежедневный автоматический сбор данных о направлениях на
+                госпитализацию с государственной медицинской платформы:
+                headless-браузер на Playwright, вход через государственный SSO,
+                запуск по расписанию. Архив направлений из read-only MySQL и
+                данные медицинской информационной системы больницы
+                синхронизируются в PostgreSQL; во внешние системы ничего не
+                записывается.
+              </p>
+              <p class="project-desc">
+                CRM для координаторов: вход через корпоративный каталог (Active
+                Directory, LDAPS), роли и права доступа, аудит изменений.
+                Монорепозиторий с общими Zod-контрактами API для backend и
+                frontend.
+              </p>
+            </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">TypeScript</li>
+                <li class="chip">Node.js</li>
+                <li class="chip">Express</li>
+                <li class="chip">React</li>
+                <li class="chip">PostgreSQL</li>
+                <li class="chip">MySQL</li>
+                <li class="chip">Playwright</li>
+                <li class="chip">Zod</li>
+                <li class="chip">systemd</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">Боты для записи в больницу</h3>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">
+                Telegram-бот и бот для мессенджера MAX: запись к врачу ГКБ
+                №&nbsp;24 прямо в мессенджере через систему записи больницы.
+                Через ботов приходит каждое четвёртое обращение пациентов.
+              </p>
+              <p class="project-desc">
+                Отдельные боты в корпоративном мессенджере присылают сотрудникам
+                уведомления о новых онлайн-записях, сбоях сайта и результатах
+                работы парсера данных.
+              </p>
+            </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">Telegram Bot API</li>
+                <li class="chip">MAX Bot API</li>
+                <li class="chip">REST API</li>
+                <li class="chip">Node.js</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">Трансляции на сайте больницы</h3>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">
+                Видеопоток (HLS) и чат на базе OwnCast внутри публичного сайта
+                больницы. Настроил Nginx reverse-proxy и отдельный поддомен под
+                чат.
+              </p>
+            </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">Next.js</li>
+                <li class="chip">OwnCast</li>
+                <li class="chip">HLS</li>
+                <li class="chip">Nginx</li>
+              </ul>
+              <div class="project-links">
+                <a
+                  href="https://www.gkb-24.ru/stream"
+                  target="_blank"
+                  rel="noopener"
+                  >Страница трансляции</a
+                >
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">Система бронирования переговорных</h3>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">
+                Веб-приложение для бронирования переговорных комнат внутри
+                организации. Недельная таблица расписания, проверка пересечений
+                броней, создание и редактирование броней с выбором даты и
+                времени.
+              </p>
+            </div>
+            <div class="shots shots--pair">
+              <button type="button" class="shot" aria-label="Открыть скриншот">
                 <img
                   src="images/booking1.jpg"
-                  alt="Бронирование — расписание"
+                  alt="Бронирование: расписание"
+                  width="3456"
+                  height="1994"
                   loading="lazy"
                 />
-              </div>
-              <div class="project-screenshot">
+              </button>
+              <button type="button" class="shot" aria-label="Открыть скриншот">
                 <img
                   src="images/booking2.jpg"
-                  alt="Бронирование — форма"
+                  alt="Бронирование: форма"
+                  width="2170"
+                  height="1690"
                   loading="lazy"
                 />
-              </div>
+              </button>
             </div>
-            <div class="project-footer">
-              <div class="tags">
-                <span class="tag">Next.js 15</span>
-                <span class="tag">React</span>
-                <span class="tag">Ant Design</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">PostgreSQL</span>
-              </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">Next.js 15</li>
+                <li class="chip">React</li>
+                <li class="chip">Ant Design</li>
+                <li class="chip">Node.js</li>
+                <li class="chip">PostgreSQL</li>
+              </ul>
             </div>
-          </div>
+          </article>
 
-          <!-- CRM -->
-          <div class="project-card"
-            data-status="live" style="cursor: default">
-            <div class="project-top">
-              <span class="project-title">CRM для медицинского центра</span>
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">База знаний колл-центра больницы</h3>
             </div>
-            <p class="project-desc">
-              SPA-приложение для ведения пациентов: карточки, история приёмов,
-              архив, заметки, статусы. Поиск пациентов с автоподстановкой
-              диагнозов, интеграция с медицинским API. Работает в продакшене
-              внутри больницы.
-            </p>
-            <div class="project-footer">
-              <div class="tags">
-                <span class="tag">React</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">Express</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">REST API</span>
-              </div>
+            <div class="project-body">
+              <p class="project-desc">
+                Внутренняя база знаний для операторов колл-центра. Python
+                собирает 90+&nbsp;разрозненных HTML-памяток в единый
+                JSON-индекс, поиск по базе работает на React, деплой через
+                Nginx.
+              </p>
             </div>
-          </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">Python</li>
+                <li class="chip">React</li>
+                <li class="chip">Nginx</li>
+              </ul>
+            </div>
+          </article>
 
-          <!-- Боты -->
-          <div class="project-card" data-status="live" style="cursor: default">
-            <div class="project-top">
-              <span class="project-title">Боты для записи в больницу</span>
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">Список пациентов</h3>
             </div>
-            <p class="project-desc">
-              Telegram-бот и бот для мессенджера MAX — онлайн-запись пациентов
-              к врачам ГКБ №&nbsp;24. Интеграция с системой записи больницы,
-              выбор специальности, врача и времени приёма прямо в мессенджере.
-            </p>
-            <div class="project-footer">
-              <div class="tags">
-                <span class="tag">Telegram Bot</span>
-                <span class="tag">MAX</span>
-                <span class="tag">REST API</span>
-                <span class="tag">Node.js</span>
-              </div>
+            <div class="project-body">
+              <p class="project-desc">
+                Контроль времени выполнения назначений пациентов: выбор
+                диапазона дат, расчёт времени между созданием и выполнением
+                назначения, таблица с цветовой индикацией времени ожидания.
+              </p>
+            </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">Node.js</li>
+                <li class="chip">Express</li>
+                <li class="chip">PostgreSQL</li>
+                <li class="chip">Vanilla JavaScript</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3 class="project-title">Сайты для малого бизнеса</h3>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">
+                С января 2024 года сделал 5&nbsp;сайтов и лендингов для малого
+                бизнеса: от вёрстки по макету до форм заявок и
+                публикации. Адаптивная вёрстка, мультиязычность на i18next,
+                галереи и слайдеры, интерфейсы с выбором дат и бронированием на
+                React.
+              </p>
+              <p class="project-desc">
+                Формы заявок с серверной частью на Express и отправкой писем
+                через Nodemailer, сборка в Docker. Публикация на Netlify и
+                GitHub Pages, сопровождение сайтов после сдачи.
+              </p>
+            </div>
+            <div class="project-foot">
+              <ul class="chips">
+                <li class="chip">React</li>
+                <li class="chip">React Router</li>
+                <li class="chip">i18next</li>
+                <li class="chip">Swiper</li>
+                <li class="chip">Express</li>
+                <li class="chip">Nodemailer</li>
+                <li class="chip">Docker</li>
+                <li class="chip">Netlify</li>
+                <li class="chip">GitHub Pages</li>
+              </ul>
               <div class="project-links">
-                <span class="badge-live">live</span>
+                <a
+                  href="https://mikdashdevelopment.com"
+                  target="_blank"
+                  rel="noopener"
+                  >Пример: mikdashdevelopment.com</a
+                >
               </div>
             </div>
-          </div>
-
-          <!-- OwnCast -->
-          <a
-            href="https://www.gkb-24.ru/stream"
-            class="project-card"
-            data-status="live"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="project-top">
-              <span class="project-title"
-                >Live-стриминг для медучреждения</span
-              >
-              <svg
-                class="project-arrow"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                width="18"
-                height="18"
-              >
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
-              </svg>
-            </div>
-            <p class="project-desc">
-              Интеграция видеостриминга (HLS-поток) и чата на базе OwnCast в
-              публичный сайт больницы. Настройка Nginx reverse-proxy и
-              выделенного субдомена под чат.
-            </p>
-            <div class="project-footer">
-              <div class="tags">
-                <span class="tag">Next.js</span>
-                <span class="tag">OwnCast</span>
-                <span class="tag">HLS</span>
-                <span class="tag">Nginx</span>
-              </div>
-              <div class="project-links">
-                <span class="project-link">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-                    />
-                  </svg>
-                  GitHub
-                </span>
-                <span class="badge-live">live</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Список пациентов -->
-          <div class="project-card" style="cursor: default">
-            <div class="project-top">
-              <span class="project-title">Список пациентов</span>
-            </div>
-            <p class="project-desc">
-              Приложение для визуализации назначений пациентов: выбор
-              диапазона дат, автоматический расчёт времени между созданием и
-              выполнением назначения, таблица с цветовой индикацией времени
-              ожидания (жёлтый / синий / красный).
-            </p>
-            <div class="project-footer">
-              <div class="tags">
-                <span class="tag">Node.js</span>
-                <span class="tag">Express</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">Vanilla JS</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- База знаний -->
-          <div class="project-card" style="cursor: default">
-            <div class="project-top">
-              <span class="project-title"
-                >База знаний колл-центра больницы</span
-              >
-            </div>
-            <p class="project-desc">
-              Внутренняя база знаний для операторов колл-центра. Парсинг
-              90+&nbsp;разрозненных HTML-памяток в единый JSON-индекс, UI с поиском по базе на React, деплой
-              через Nginx.
-            </p>
-            <div class="project-footer">
-              <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">React</span>
-                <span class="tag">Nginx</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Movies explorer -->
-          <a
-            href="https://github.com/YakubovYakov/movies-explorer-frontend"
-            class="project-card"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="project-top">
-              <span class="project-title">Movies Explorer</span>
-              <svg
-                class="project-arrow"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                width="18"
-                height="18"
-              >
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
-              </svg>
-            </div>
-            <p class="project-desc">
-              Дипломный проект Яндекс Практикума. Сервис для поиска фильмов с
-              аутентификацией, поиском по ключевым словам и сохранением в
-              избранное.
-            </p>
-            <div class="project-footer">
-              <div class="tags">
-                <span class="tag">React</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">MongoDB</span>
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-              </div>
-              <div class="project-links">
-                <span class="project-link">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-                    />
-                  </svg>
-                  GitHub
-                </span>
-              </div>
-            </div>
-          </a>
+          </article>
         </div>
       </section>
 
-      <!-- EDUCATION -->
-      <section class="section">
-        <div class="section-header">
-          <span class="section-label">образование</span>
-          <div class="section-line"></div>
+      <!-- ПРАКТИКИ -->
+      <section class="section" id="practice">
+        <div class="section-head">
+          <h2 class="section-title">Как работаю</h2>
+          <p class="section-note">
+            Инженерные практики из работы над сайтом больницы.
+          </p>
         </div>
-        <div class="edu-grid">
-          <div class="edu-card">
-            <div class="edu-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-              </svg>
-            </div>
-            <div>
-              <div class="edu-school">Северо-Кавказский федеральный университет</div>
-              <div class="edu-degree">Информационные системы и технологии · Бакалавр</div>
-              <div class="edu-year">2026</div>
-            </div>
+        <div class="practice">
+          <div class="practice-item">
+            <h3>Надёжные релизы</h3>
+            <p>
+              Сборка идёт в отдельный каталог, переключение только после
+              успешной сборки. При любом сбое выкатка сама откатывает код,
+              зависимости и сборку. Сам скрипт покрыт тестом в изолированном
+              репозитории.
+            </p>
           </div>
-          <div class="edu-card">
-            <div class="edu-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-              </svg>
+          <div class="practice-item">
+            <h3>Тесты проверяют правила проекта</h3>
+            <p>
+              Около 1000 автотестов на Jest и supertest, интеграционные тесты на
+              изолированных PostgreSQL и Redis, CI на GitHub Actions. Часть
+              тестов проверяет сами правила: каждая запись в админке попадает в
+              журнал аудита, каждый публичный POST проверяет тело запроса до
+              ограничителя частоты.
+            </p>
+          </div>
+          <div class="practice-item">
+            <h3>Безопасность</h3>
+            <p>
+              Аудит backend: валидация входных данных, ограничение частоты
+              запросов, проверка Origin против CSRF, JWT-сессии с возможностью
+              отзыва, блокировка подбора логина, защита выгрузок Excel и CSV от
+              инъекции формул. Состояние сервера проверяется по расписанию.
+            </p>
+          </div>
+          <div class="practice-item">
+            <h3>Персональные данные</h3>
+            <p>
+              IP-адреса хранятся только в виде хеша с солью, идентификаторы в
+              журналах обезличиваются автоматически, публичные API не отдают
+              адреса получателей писем.
+            </p>
+          </div>
+          <div class="practice-item">
+            <h3>SEO как инженерная задача</h3>
+            <p>
+              Скрипт собирает сайт, обходит около 290 публичных адресов и
+              проверяет canonical, JSON-LD, sitemap и редиректы. Накопленный
+              SEO-долг доведён до нуля, а проверка перед выкатом не даёт ему
+              вернуться.
+            </p>
+          </div>
+          <div class="practice-item">
+            <h3>Мониторинг</h3>
+            <p>
+              Watchdog на базе systemd timer следит за приложением и присылает
+              уведомления о сбоях. Для инцидентов есть инструкция по
+              реагированию.
+            </p>
+          </div>
+          <div class="practice-item">
+            <h3>Работа с ИИ-агентами</h3>
+            <p>
+              В разработке использую Claude Code и Codex. Веду задачи по
+              этапам: план, реализация агентом, ревью, тесты, обновление правил
+              проекта. Результат проверяю тестами и ревью, коммиты и выкладку
+              контролирую сам.
+            </p>
+          </div>
+          <div class="practice-item">
+            <h3>Порядок в процессах</h3>
+            <p>
+              Перевёл постановку задач в двух отделах больницы из личных
+              сообщений в общую доску задач: видно, кто, что и в какие сроки
+              делает. Веду документацию проекта: правила, инструкцию по
+              авариям, журнал решений.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ОБРАЗОВАНИЕ -->
+      <section class="section" id="education">
+        <div class="section-head">
+          <h2 class="section-title">Образование</h2>
+        </div>
+        <div class="edu">
+          <div class="edu-row">
+            <div>
+              <div class="edu-school">
+                Северо-Кавказский федеральный университет
+              </div>
+              <div class="edu-degree">
+                Бакалавр, 09.03.02 "Информационные системы и технологии",
+                Ставрополь
+              </div>
             </div>
+            <span class="edu-years">2026</span>
+          </div>
+          <div class="edu-row">
             <div>
               <div class="edu-school">Яндекс Практикум</div>
-              <div class="edu-degree">Веб-разработка</div>
+              <div class="edu-degree">Курс "Веб-разработка"</div>
             </div>
+            <span class="edu-years">2023</span>
           </div>
         </div>
       </section>
+    </main>
 
-      <!-- CONTACT -->
-      <section class="section">
-        <div class="section-header">
-          <span class="section-label">контакты</span>
-          <div class="section-line"></div>
-        </div>
-        <div class="contact-grid">
-          <a
-            href="https://t.me/yaks1331"
-            class="contact-card"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.26l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.299z"
-                />
-              </svg>
-            </div>
-            <div>
-              <div class="contact-label">Telegram</div>
-              <div class="contact-value">@yaks1331</div>
-            </div>
-          </a>
-          <a href="mailto:yakubov01yakov@yandex.ru" class="contact-card">
-            <div class="contact-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
-            </div>
-            <div>
-              <div class="contact-label">Email</div>
-              <div class="contact-value">yakubov01yakov@yandex.ru</div>
-            </div>
-          </a>
-          <a
-            href="https://github.com/YakubovYakov"
-            class="contact-card"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-                />
-              </svg>
-            </div>
-            <div>
-              <div class="contact-label">GitHub</div>
-              <div class="contact-value">YakubovYakov</div>
-            </div>
-          </a>
-        </div>
-      </section>
-    </div>
-
-    <footer>
+    <footer class="contacts" id="contacts">
       <div class="container">
-        <div class="footer-inner">
-          <span class="footer-text">© 2026 Яков Якубов</span>
-          <span class="footer-text">Fullstack Developer · Moscow</span>
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Контакты</h2>
+          </div>
+          <ul class="contact-list">
+            <li>
+              <a
+                class="contact-link"
+                href="https://t.me/yaks1331"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="contact-name">Telegram</span>
+                <span class="contact-value">@yaks1331</span>
+              </a>
+            </li>
+            <li>
+              <a class="contact-link" href="mailto:yakubov01yakov@yandex.ru">
+                <span class="contact-name">Email</span>
+                <span class="contact-value">yakubov01yakov@yandex.ru</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="contact-link"
+                href="https://github.com/YakubovYakov"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="contact-name">GitHub</span>
+                <span class="contact-value">YakubovYakov</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <div class="footer-line">
+          <span>© 2026 Яков Якубов</span>
+          <span>Fullstack-разработчик, Москва</span>
         </div>
       </div>
     </footer>
+
+    <dialog class="lightbox" aria-label="Скриншот">
+      <img alt="" />
+      <button type="button" class="lightbox-close" aria-label="Закрыть">
+        &times;
+      </button>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      const lightbox = document.querySelector(".lightbox");
+      const lightboxImage = lightbox.querySelector("img");
+
+      document.querySelectorAll(".shot").forEach((shotButton) => {
+        shotButton.addEventListener("click", () => {
+          const shotImage = shotButton.querySelector("img");
+          lightboxImage.src = shotImage.src;
+          lightboxImage.alt = shotImage.alt;
+          lightbox.showModal();
+        });
+      });
+
+      lightbox
+        .querySelector(".lightbox-close")
+        .addEventListener("click", () => lightbox.close());
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) lightbox.close();
+      });
+
+      const toast = document.querySelector(".toast");
+      let toastTimer;
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("is-visible");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 2400);
+      }
+
+      document.querySelectorAll('a[href^="mailto:"]').forEach((mailLink) => {
+        mailLink.addEventListener("click", async (event) => {
+          event.preventDefault();
+          const emailAddress = mailLink.getAttribute("href").slice("mailto:".length);
+          try {
+            await navigator.clipboard.writeText(emailAddress);
+            showToast(`Почта скопирована: ${emailAddress}`);
+          } catch {
+            showToast(emailAddress);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
